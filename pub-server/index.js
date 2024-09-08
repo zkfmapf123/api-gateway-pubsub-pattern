@@ -13,16 +13,18 @@ app.get("/pub", async (req,res) => {
     let statusCode = 200
     
     try{
-        const result = await axios.post(SUB_HOST, {
-            body : {
-                id : uuidv4(),
-                name : "leedonggyu",
-                age : 31,
-                job : "devops"
-            }
-        })
 
-        console.log(`Success >> ${result.status}`)
+        for (let i=1; i<11; i++) {
+            const result = await axios.post(SUB_HOST, {
+                body : {
+                    id : uuidv4(),
+                    name : `leedonggyu-${i}`,
+                    age : 31,
+                    job : "devops"
+                }
+            })
+            console.log(`Success >> ${result.status}-${i}`)
+        }
 
     }catch(e){
         console.error(e)

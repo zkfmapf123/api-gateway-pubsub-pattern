@@ -8,18 +8,28 @@ const client = new S3Client({
 const PORT = process.env.PORT || 3001
 
 const app = express()
+app.use(express.json())
 
 app.get("/",(req,res) => res.status(200).send("hello world sub server"))
 app.get("/ping",(req,res) => res.status(200).send("hello"))
-app.post("/sub",(req,res) =>{
+app.post("/sub",async (req,res) =>{
    
-    console.log(req.body)
+    console.log("body : ",  JSON.stringify(req, null, 2))
 
-    // const command=  new PutObjectCommand({
-    //     Bucket  : "donggyu-test-poc"
-    //     Key : ""
-    // })
-    
+    const {id} = req
+    try{
+        const command=  new PutObjectCommand({
+            Bucket  : "donggyu-test-poc",
+            Key : `${id}-sqs.txt`,
+            Body : JSON.stringify(req)
+        })
+
+        const result = await client.send(command)
+        console.log("result >> ", result)
+    }catch(e) {
+        console.error(e)
+        // ignore
+    }
 
     return res.status(200).json({})
 })
