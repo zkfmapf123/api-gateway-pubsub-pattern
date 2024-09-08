@@ -19,7 +19,7 @@
 ![tobe](./public/tobe.png)
 
 - Call Pub Server -> Proxy Gateway -> Messaging Queue -> Sub Server
-- Sub Server가 죽어도 SQS에서 Queueing으로 구성
+- Sub Server가 죽어도 SQS에서 Queueing 동작하도록 구성
 
 - Pub Server Host : pub.leedonggyu.com
 - GW Server Host : sub-gw.leedonggyu.com
@@ -113,7 +113,9 @@ app.post("/sub",async (req,res) =>{
 
 ## Reference
 
-- <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/integrate-amazon-api-gateway-with-amazon-sqs-to-handle-asynchronous-rest-apis.html"> API Gateway </a>
+- <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/integrate-amazon-api-gateway-with-amazon-sqs-to-handle-asynchronous-rest-apis.html"> API Gateway + SQS </a>
+
+- <a href="https://docs.aws.amazon.com/ko_kr/eventbridge/latest/userguide/eb-pipes-input-transformation.html"> Event Bridge Pipe 변환 </a>
 
 
 ```sh

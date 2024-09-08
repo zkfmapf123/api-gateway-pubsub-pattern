@@ -14,9 +14,9 @@ app.get("/",(req,res) => res.status(200).send("hello world sub server"))
 app.get("/ping",(req,res) => res.status(200).send("hello"))
 app.post("/sub",async (req,res) =>{
    
-    console.log("body : ",  JSON.stringify(req, null, 2))
+    console.log("body : ",  JSON.stringify(req.body, null, 2))
 
-    const {id} = req
+    const {id} = req.body.body.body
     try{
         const command=  new PutObjectCommand({
             Bucket  : "donggyu-test-poc",
