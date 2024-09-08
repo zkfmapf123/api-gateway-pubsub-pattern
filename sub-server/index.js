@@ -13,15 +13,17 @@ app.use(express.json())
 app.get("/",(req,res) => res.status(200).send("hello world sub server"))
 app.get("/ping",(req,res) => res.status(200).send("hello"))
 app.post("/sub",async (req,res) =>{
-   
-    console.log("body : ",  JSON.stringify(req.body, null, 2))
+  
+    const newRes = req.body.body.body
+    
+    console.log("body : ",  JSON.stringify(newRes, null, 2))
 
-    const {id} = req.body.body.body
+    const {id} = newRes
     try{
         const command=  new PutObjectCommand({
             Bucket  : "donggyu-test-poc",
             Key : `${id}-sqs.txt`,
-            Body : JSON.stringify(req)
+            Body : JSON.stringify(newRes)
         })
 
         const result = await client.send(command)
